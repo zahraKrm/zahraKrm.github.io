@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pixels or Queues? Deep and Tabular RL for Traffic Signal Control · Zahra Karami</title>
+  <meta name="description" content="Project page of the preprint “Pixels or Queues? A Careful Evaluation of Deep and Tabular Reinforcement Learning for Traffic Signal Control” by Zahra Karami and Azadeh Zamanifar (2026): abstract, key findings, figures, PDF, code and BibTeX.">
+  <meta name="author" content="Zahra Karami">
+  <link rel="canonical" href="https://zahrakrm.github.io/pixels-or-queues/">
+
+  <!-- Google Scholar -->
+  <meta name="citation_title" content="Pixels or Queues? A Careful Evaluation of Deep and Tabular Reinforcement Learning for Traffic Signal Control">
+  <meta name="citation_author" content="Karami, Zahra">
+  <meta name="citation_author_institution" content="Science and Research Branch, Islamic Azad University">
+  <meta name="citation_author" content="Zamanifar, Azadeh">
+  <meta name="citation_author_institution" content="Science and Research Branch, Islamic Azad University">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_pdf_url" content="https://zahrakrm.github.io/assets/files/Pixels_or_Queues_Karami_Zamanifar_2026.pdf">
+  <meta name="citation_abstract_html_url" content="https://zahrakrm.github.io/pixels-or-queues/">
+
+  <!-- Social previews -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Zahra Karami">
+  <meta property="og:title" content="Pixels or Queues? A Careful Evaluation of Deep and Tabular Reinforcement Learning for Traffic Signal Control">
+  <meta property="og:description" content="A pixel-based DQN beats tabular Q-learning on the metric it was developed with, but counting the all-red clearance ticks changes the ranking. Preprint by Zahra Karami and Azadeh Zamanifar, 2026.">
+  <meta property="og:url" content="https://zahrakrm.github.io/pixels-or-queues/">
+  <meta property="og:image" content="https://zahrakrm.github.io/assets/img/og-paper.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Title of the paper and its overview diagram">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1316" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+
+  <link rel="preload" href="../assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/source-serif-4-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script>
+    document.documentElement.classList.add("js");
+    try {
+      var savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light" || savedTheme === "dark") {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      }
+    } catch (e) {}
+  </script>
+  <script src="../assets/js/main.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Pixels or Queues? A Careful Evaluation of Deep and Tabular Reinforcement Learning for Traffic Signal Control",
+    "name": "Pixels or Queues? A Careful Evaluation of Deep and Tabular Reinforcement Learning for Traffic Signal Control",
+    "author": [
+      { "@type": "Person", "name": "Zahra Karami", "url": "https://zahrakrm.github.io/" },
+      { "@type": "Person", "name": "Azadeh Zamanifar" }
+    ],
+    "datePublished": "2026",
+    "inLanguage": "en",
+    "url": "https://zahrakrm.github.io/pixels-or-queues/",
+    "image": "https://zahrakrm.github.io/assets/img/og-paper.png",
+    "keywords": ["reinforcement learning", "deep Q-network", "Q-learning", "traffic signal control", "evaluation"],
+    "encoding": {
+      "@type": "MediaObject",
+      "contentUrl": "https://zahrakrm.github.io/assets/files/Pixels_or_Queues_Karami_Zamanifar_2026.pdf",
+      "encodingFormat": "application/pdf"
+    }
+  }
+  </script>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7.5A2.5 2.5 0 0 0 5 5.5v13A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8.5 7.5-5 4.5 5 4.5"/><path d="m15.5 7.5 5 4.5-5 4.5"/><path d="m13.5 5-3 14"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5.5 15H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v.5"/></symbol>
+    <symbol id="i-braces" viewBox="0 0 24 24"><path d="M8 4c-2 0-3 1-3 3v2c0 1.2-.8 2-2 2v2c1.2 0 2 .8 2 2v2c0 2 1 3 3 3"/><path d="M16 4c2 0 3 1 3 3v2c0 1.2.8 2 2 2v2c-1.2 0-2 .8-2 2v2c0 2-1 3-3 3"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="../"><span class="brand-mark" aria-hidden="true">ZK</span>Zahra Karami</a>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="../#about">About</a></li>
+          <li><a href="../#research" aria-current="page">Research</a></li>
+          <li><a href="../#projects">Projects</a></li>
+          <li><a href="../#education">Education</a></li>
+          <li><a href="../#skills">Skills</a></li>
+          <li><a href="../#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="btn btn-secondary btn-sm" href="../assets/files/Zahra_Karami_CV.pdf"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg><span class="btn-cv-label">CV</span><span class="visually-hidden"> (PDF)</span></a>
+        <button class="icon-btn js-only" type="button" data-theme-toggle aria-label="Switch theme">
+          <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+          <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        </button>
+        <button class="icon-btn nav-toggle js-only" type="button" data-nav-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+          <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- =========================================================== TITLE -->
+    <section class="paper-hero" aria-labelledby="paper-title">
+      <div class="container">
+        <a class="back-link" href="../#research"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>Back to homepage</a>
+        <div><span class="badge">Preprint · 2026</span></div>
+        <h1 id="paper-title">Pixels or Queues? A Careful Evaluation of Deep and Tabular Reinforcement Learning for Traffic Signal Control</h1>
+        <ul class="paper-authors">
+          <li><a href="../">Zahra Karami</a></li>
+          <li>Azadeh Zamanifar</li>
+        </ul>
+        <p class="paper-affil">School of Electrical and Computer Engineering, Science and Research Branch, Islamic Azad University, Tehran, Iran</p>
+        <div class="pub-actions">
+          <a class="btn btn-primary" href="../assets/files/Pixels_or_Queues_Karami_Zamanifar_2026.pdf"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>Paper (PDF)</a>
+          <a class="btn btn-secondary" href="https://github.com/zahraKrm/Deep-RL-Traffic-Signal-Control"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>Code</a>
+          <a class="btn btn-secondary" href="#citation"><svg class="icon" aria-hidden="true"><use href="#i-braces"/></svg>BibTeX</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== TEASER -->
+    <section class="section pt-0" aria-label="Overview figure">
+      <div class="container">
+        <figure class="figure">
+          <a class="figure-frame" href="../assets/img/paper/overview.webp" title="Open the full-size figure">
+            <img src="../assets/img/paper/overview.webp" width="1838" height="726" decoding="async"
+                 alt="Overview diagram: the simulated intersection is seen either as a raw 20 by 20 by 3 pixel raster that a convolutional deep Q-network maps to two action values, or as two queue counts that index a Q-table. Both lead to a phase decision; changing phase inserts three all-red clearance ticks.">
+          </a>
+          <figcaption><strong>Two ways to see an intersection.</strong> The simulator is observed either as a raw 20×20×3 raster that a convolutional deep Q-network maps to two action values (top), or as two queue counts that index a Q-table (bottom). The chosen phase is applied at the next decision step; changing phase inserts three all-red clearance ticks.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================================================== TL;DR + ABSTRACT -->
+    <section class="section pt-0" aria-labelledby="abstract-title">
+      <div class="container prose">
+        <p class="tldr"><strong>In short.</strong> On the waiting-time measure it was developed with, a pixel-based deep Q-network clearly beats tabular Q-learning and fixed-time control. But that measure skips the all-red clearance ticks, which hold 31–65% of all halted vehicle-ticks. Once they are counted, a simple longest-queue-first rule beats every learned agent, and which learned agent comes out ahead depends on how arrivals are simulated.</p>
+
+        <h2 id="abstract-title" class="mt-lg">Abstract</h2>
+        <p>Adaptive traffic signal control is a natural testbed for reinforcement learning (RL), yet reported gains depend strongly on simulator details, reward design, and the metrics and baselines used for evaluation. We study two agents for an isolated four-approach intersection in a lightweight cellular simulator: a tabular Q-learning agent that observes queue counts, and a deep Q-network (DQN) that maps the raw 20×20×3 occupancy raster directly to phase decisions. On 5,000 held-out episodes, the released DQN (a single training run) lowers the waiting-time measure used during development by 17.2% relative to tabular agents trained on the same grid for 3,000 episodes and by 44.9% relative to Webster-timed fixed-time control.</p>
+        <p>We then add classical baselines, demand and asymmetry sweeps, per-vehicle delay tails, and a clearance-inclusive delay that also counts the all-red ticks inserted at every phase change; 31–65% of all halted vehicle-ticks fall in these ticks, which the development measure never observes. Under full accounting, the comparison between the agents depends on how arrivals are simulated. When one arrival draw is reused for all ticks of a phase change, as in the released evaluation, the DQN is no better than tabular agents trained for 3,000 episodes and worse than tabular agents that also observe the current phase and are rewarded for clearance-inclusive delay, a change that cuts their switching by 71%. With independent arrivals in every tick, as in the DQN’s own training environment, the DQN has 14.5% and 8.4% less delay than these two tabular agents.</p>
+        <p>In both settings a longest-queue-first rule has the lowest clearance-inclusive delay, and the learned agents degrade quickly above their training demand. Saliency and input ablations show that the DQN relies on vehicles at the stop lines and on the signal-head pixels, from which it infers the current phase.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================== FINDINGS -->
+    <section class="section pt-0" aria-labelledby="findings-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="findings-title">Key findings</h2>
+          <p>5,000 held-out episodes on the 20×20 grid</p>
+        </div>
+        <ul class="findings">
+          <li class="finding"><span class="num">17.2%</span><p>lower waiting-time measure for the pixel DQN than for tabular agents trained on the same grid for 3,000 episodes.</p></li>
+          <li class="finding"><span class="num">44.9%</span><p>lower on the same measure than Webster-timed fixed-time control.</p></li>
+          <li class="finding"><span class="num">31–65%</span><p>of all halted vehicle-ticks fall in the all-red clearance ticks of phase changes, which the development measure never observes.</p></li>
+          <li class="finding"><span class="num">LQF</span><p>A longest-queue-first rule has the lowest clearance-inclusive delay under both arrival models, ahead of every learned agent.</p></li>
+          <li class="finding"><span class="num">8.4–14.5%</span><p>less clearance-inclusive delay for the DQN than tabular Q-learning (3,000 episodes) and its phase-aware, clearance-rewarded variant, when arrivals are drawn independently in every tick. With one draw reused across a phase change, it is no better than either.</p></li>
+          <li class="finding"><span class="num">71%</span><p>fewer phase switches when the tabular agent also observes the current phase and is rewarded for clearance-inclusive delay.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========================================================= FIGURES -->
+    <section class="section pt-0" aria-labelledby="figures-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="figures-title">Figures</h2>
+          <p>From the paper</p>
+        </div>
+        <div class="figures">
+          <figure class="figure">
+            <a class="figure-frame" href="../assets/img/paper/env.webp" title="Open the full-size figure">
+              <img src="../assets/img/paper/env.webp" width="1567" height="854" loading="lazy" decoding="async"
+                   alt="Left: the 20 by 20 cellular intersection with single-lane approaches, queue zones, conflict cells and signal heads. Right: bar chart of halted vehicles over 60 ticks of a DQN episode, with red bars for vehicles halted during all-red clearance ticks.">
+            </a>
+            <figcaption><strong>The cellular intersection.</strong> (a) The default 20×20 grid: single-lane approaches, queue zones, conflict cells and signal heads. (b) A 60-tick excerpt of a DQN episode. Every phase change inserts three all-red ticks (red) before the new green tick; the development measure <em>W</em><sub>dec</sub> counts halted vehicles only at decision ticks (black marks), so the red bars are invisible to it.</figcaption>
+          </figure>
+
+          <figure class="figure">
+            <a class="figure-frame" href="../assets/img/paper/main.webp" title="Open the full-size figure">
+              <img src="../assets/img/paper/main.webp" width="1987" height="788" loading="lazy" decoding="async"
+                   alt="Left: dumbbell chart comparing, for each controller, the development measure and the clearance-inclusive delay; LQF has the lowest clearance-inclusive delay. Right: survival curves of per-vehicle delay on a log scale.">
+            </a>
+            <figcaption><strong>Held-out evaluation on the 20×20 grid.</strong> (a) For each controller, the open marker is the development measure <em>W</em><sub>dec</sub> and the filled marker the clearance-inclusive <em>W</em><sub>all</sub> (lower is better); the dotted line marks the <em>W</em><sub>all</sub> of the longest-queue-first rule (LQF). (b) Survival function of per-vehicle delay.</figcaption>
+          </figure>
+
+          <figure class="figure">
+            <a class="figure-frame" href="../assets/img/paper/accounting.webp" title="Open the full-size figure">
+              <img src="../assets/img/paper/accounting.webp" width="1887" height="892" loading="lazy" decoding="async"
+                   alt="Left: stacked bars of halted ticks per vehicle, split into green ticks and all-red clearance ticks, for seven controllers. Right: scatter plot of the development measure against the clearance-inclusive delay.">
+            </a>
+            <figcaption><strong>Accounting for clearance.</strong> (a) Per-vehicle delay split into ticks halted under a green phase and ticks halted during all-red clearance, with phase switches per episode. (b) <em>W</em><sub>dec</sub> against <em>W</em><sub>all</sub> for fixed-time plans, LQF, SOTL and the learned agents: the two measures rank the controllers differently.</figcaption>
+          </figure>
+
+          <figure class="figure">
+            <a class="figure-frame" href="../assets/img/paper/saliency.webp" title="Open the full-size figure">
+              <img src="../assets/img/paper/saliency.webp" width="1696" height="1106" loading="lazy" decoding="async"
+                   alt="Saliency and occlusion maps over the intersection grid, a bar chart of delay when the signal-head pixels are corrupted, and curves of a vehicle's contribution against its distance to the stop line.">
+            </a>
+            <figcaption><strong>Interpreting the pixel-based agent.</strong> (a) Gradient saliency and (b) occlusion contributions over about 5,000 visited states; (c) delay and switching when the signal-head pixels are corrupted at test time; (d) contribution of a single vehicle by its distance to the stop line; (e) contribution of the signal-head pixels in each phase.</figcaption>
+          </figure>
+
+          <figure class="figure">
+            <a class="figure-frame" href="../assets/img/paper/demand.webp" title="Open the full-size figure">
+              <img src="../assets/img/paper/demand.webp" width="1636" height="817" loading="lazy" decoding="async"
+                   alt="Three line charts against arrival probability: clearance-inclusive delay, development measure, and the share of blocked arrivals, for all controllers.">
+            </a>
+            <figcaption><strong>Demand sweep.</strong> Agents trained at arrival probability <em>p</em> = 0.1 (dotted line): (a) clearance-inclusive delay and (b) development measure on log scales; (c) share of arrivals blocked at full approaches.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== CODE + CITE -->
+    <section class="section pt-0" aria-labelledby="citation-title">
+      <div class="container section-narrow">
+        <div class="section-head">
+          <h2 id="citation-title">Code and citation</h2>
+        </div>
+        <p class="muted-text">The simulator, the training and evaluation scripts and the trained agents are on <a href="https://github.com/zahraKrm/Deep-RL-Traffic-Signal-Control">GitHub</a>. If you use this work, please cite:</p>
+        <div class="code-block" id="citation">
+<pre id="bibtex-paper">@misc{karami2026pixels,
+  title  = {Pixels or Queues? {A} Careful Evaluation of Deep and
+            Tabular Reinforcement Learning for Traffic Signal Control},
+  author = {Karami, Zahra and Zamanifar, Azadeh},
+  year   = {2026},
+  note   = {Preprint},
+  url    = {https://zahrakrm.github.io/pixels-or-queues/}
+}</pre>
+          <button class="copy-btn js-only" type="button" data-copy="bibtex-paper"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span data-label>Copy</span></button>
+        </div>
+        <div class="pub-actions">
+          <a class="btn btn-primary" href="../assets/files/Pixels_or_Queues_Karami_Zamanifar_2026.pdf"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>Paper (PDF)</a>
+          <a class="btn btn-secondary" href="https://github.com/zahraKrm/Deep-RL-Traffic-Signal-Control"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>Code on GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span data-year>2026</span> Zahra Karami</p>
+      <p><a href="../">Homepage</a> · <a href="#top">Back to top</a></p>
+    </div>
+  </footer>
+</body>
+</html>

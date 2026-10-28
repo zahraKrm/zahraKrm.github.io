@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zahrakrm.github.io/sitemap.xml
